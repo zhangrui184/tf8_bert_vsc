@@ -35,13 +35,13 @@ FLAGS = tf.app.flags.FLAGS
 #data_root="D:\python project me\data\my_point_net/finished_files/train.bin"
 #root="/home/ddd/data/news_data/finished_files"
 #data_root="/home/ddd/data/news_data/finished_files/train.bin"
-root="/home/ddd/data/cnndailymail3/finished_files"
-data_root="/home/ddd/data/cnndailymail3/finished_files/train.bin"
-bert_path="/home/ddd/project/tf8_git/bert/uncased"
+root="/home/ddd/data/cnndailymail4/finished_files"
+data_root="/home/ddd/data/cnndailymail4/finished_files/train.bin"
+bert_path="/home/ddd/data/cnndailymail4/finished_files/uncased"
 # Where to find data
 tf.app.flags.DEFINE_string('data_path', data_root, 'Path expression to tf.Example datafiles. Can include wildcards to access multiple datafiles.')
-tf.app.flags.DEFINE_string('vocab_path', root+'/'+"vocab", 'Path expression to text vocabulary file.')
-#tf.app.flags.DEFINE_string('vocab_path', "/home/ddd/project/tf8_git/bert/uncased/vocab.txt", 'Path expression to text vocabulary file.')
+#tf.app.flags.DEFINE_string('vocab_path', root+'/'+"vocab", 'Path expression to text vocabulary file.')
+tf.app.flags.DEFINE_string('vocab_path', bert_path+"vocab.txt", 'Path expression to text vocabulary file.')
 tf.app.flags.DEFINE_string('bert_path',bert_path,'')
 #tf.app.flags.DEFINE_string('data_path', '', 'Path expression to tf.Example datafiles. Can include wildcards to access multiple datafiles.')
 #tf.app.flags.DEFINE_string('vocab_path','', 'Path expression to text vocabulary file.')
@@ -64,7 +64,9 @@ tf.app.flags.DEFINE_integer('max_enc_steps', 400, 'max timesteps of encoder (max
 tf.app.flags.DEFINE_integer('max_dec_steps', 100, 'max timesteps of decoder (max summary tokens)')
 tf.app.flags.DEFINE_integer('beam_size', 4, 'beam size for beam search decoding.')
 tf.app.flags.DEFINE_integer('min_dec_steps', 35, 'Minimum sequence length of generated summary. Applies only for beam search decoding mode')
-tf.app.flags.DEFINE_integer('vocab_size', 50000, 'Size of vocabulary. These will be read from the vocabulary file in order. If the vocabulary file contains fewer words than this number, or if this number is set to 0, will take all words in the vocabulary file.')
+#tf.app.flags.DEFINE_integer('vocab_size', 50000, 'Size of vocabulary. These will be read from the vocabulary file in order. If the vocabulary file contains fewer words than this number, or if this number is set to 0, will take all words in the vocabulary file.')
+tf.app.flags.DEFINE_integer('vocab_size', 30520, 'Size of vocabulary. These will be read from the vocabulary file in order. If the vocabulary file contains fewer words than this number, or if this number is set to 0, will take all words in the vocabulary file.')
+
 tf.app.flags.DEFINE_float('lr', 0.15, 'learning rate')
 tf.app.flags.DEFINE_float('adagrad_init_acc', 0.1, 'initial accumulator value for Adagrad')
 tf.app.flags.DEFINE_float('rand_unif_init_mag', 0.02, 'magnitude for lstm cells random uniform inititalization')

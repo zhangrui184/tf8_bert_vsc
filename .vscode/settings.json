@@ -1,0 +1,20 @@
+{
+    "python.pythonPath": "/home/ddd/download/anaconda/detal3/envs/tf1/bin/python",
+    "terminal.integrated.shell.windows": "D:/Program Files/Git/git-bash.exe",
+    "terminal.integrated.shellArgs.windows":[
+        "-1",
+        "-1"
+    ],
+    // 默认对Python文件进行静态检查
+  "python.linting.enabled": true,
+
+  // 默认在Python文件保存时进行静态检查
+  "python.linting.lintOnSave": true,
+
+  // 默认使用pylint对Python文件进行静态检查
+  "python.linting.pylintEnabled": true,
+  "python.linting.pylintArgs": [
+    "--extension-pkg-whitelist=PyQt5",
+    "--disable=W0612,W0631,W0703,W0621,W0613,W0611,W1308,C0411,C0111,C0103,C0301,C0304,C0305,E1101,R0913,R0914,R0915,R0903" ,
+],
+}

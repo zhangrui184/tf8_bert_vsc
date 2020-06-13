@@ -205,7 +205,7 @@ class SummarizationModel(object):
     """Add the whole sequence-to-sequence model to the graph."""
     hps = self._hps
     vsize = self._vocab.size() # size of the vocabulary
-
+    
     with tf.variable_scope('seq2seq'):
       # Some initializers
       self.rand_unif_init = tf.random_uniform_initializer(-hps.rand_unif_init_mag, hps.rand_unif_init_mag, seed=123)

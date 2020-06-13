@@ -54,23 +54,32 @@ class Vocab(object):
       self._count += 1
 
     # Read the vocab file and add words up to max_size
-    with open(vocab_file, 'r',encoding="utf-8") as vocab_f:
-      for line in vocab_f:
-        pieces = line.split()
-        if len(pieces) != 2:
-          print('Warning: incorrectly formatted line in vocabulary file: %s\n' % line)
-          continue
-        w = pieces[0]
-        if w in [SENTENCE_START, SENTENCE_END, UNKNOWN_TOKEN, PAD_TOKEN, START_DECODING, STOP_DECODING]:
-          raise Exception('<s>, </s>, [UNK], [PAD], [START] and [STOP] shouldn\'t be in the vocab file, but %s is' % w)
-        if w in self._word_to_id:
-          raise Exception('Duplicated word in vocabulary file: %s' % w)
-        self._word_to_id[w] = self._count
-        self._id_to_word[self._count] = w
-        self._count += 1
-        if max_size != 0 and self._count >= max_size:
-          print("max_size of vocab was specified as %i; we now have %i words. Stopping reading." % (max_size, self._count))
-          break
+   # with open(vocab_file, 'r',encoding="utf-8") as vocab_f:
+     # for line in vocab_f:
+      #  pieces = line.split()
+       # if len(pieces) != 2:
+       #   print('Warning: incorrectly formatted line in vocabulary file: %s\n' % line)
+       #   continue
+       # w = pieces[0]
+    with tf.gfile.GFile(vocab_file, "r") as reader:
+      while True:
+          token = convert_to_unicode(reader.readline())
+          if not token:
+             break
+          token = token.strip()
+          w=token
+
+
+          if w in [SENTENCE_START, SENTENCE_END, UNKNOWN_TOKEN, PAD_TOKEN, START_DECODING, STOP_DECODING]:
+            raise Exception('<s>, </s>, [UNK], [PAD], [START] and [STOP] shouldn\'t be in the vocab file, but %s is' % w)
+          if w in self._word_to_id:
+            raise Exception('Duplicated word in vocabulary file: %s' % w)
+          self._word_to_id[w] = self._count
+          self._id_to_word[self._count] = w
+          self._count += 1
+          if max_size != 0 and self._count >= max_size:
+            print("max_size of vocab was specified as %i; we now have %i words. Stopping reading." % (max_size, self._count))
+            break
 
     print("Finished constructing vocabulary of %i total words. Last word added: %s" % (self._count, self._id_to_word[self._count-1]))
 
